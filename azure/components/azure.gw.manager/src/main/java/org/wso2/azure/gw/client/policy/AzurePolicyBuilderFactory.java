@@ -46,13 +46,14 @@ public class AzurePolicyBuilderFactory {
 
     public AzurePolicyBuilderFactory() throws APIManagementException {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-        documentBuilderFactory.setNamespaceAware(false);
+        documentBuilderFactory.setNamespaceAware(true);
         documentBuilderFactory.setIgnoringComments(false);
         documentBuilderFactory.setCoalescing(true);
         documentBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
         documentBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
         try {
             documentBuilderFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+            documentBuilderFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
         } catch (ParserConfigurationException e) {
             if (log.isDebugEnabled()) {
                 log.debug("Disabling doctype declaration feature is not supported by the XML parser.", e);
